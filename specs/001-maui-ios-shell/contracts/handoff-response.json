@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pepsico.com/schemas/maui-shell/handoff-response.json",
+  "title": "Handoff Response",
+  "description": "Response payload schema for the MAUI shell app to return control to the orchestrator app. This contract is NOT IMPLEMENTED in the current POC but is defined here to satisfy Constitution Principle II (Native Handoff Protocol). Future implementation will use this schema to invoke the orchestrator's deep link with check-in results.",
+  "type": "object",
+  "required": ["status", "completedTimestamp"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["SUCCESS", "FAILURE", "CANCEL"],
+      "description": "Outcome of the check-in workflow. SUCCESS = user completed check-in, FAILURE = error occurred, CANCEL = user explicitly aborted."
+    },
+    "completedTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp when the check-in workflow completed (success, failure, or cancellation).",
+      "examples": ["2026-01-26T14:35:00Z"]
+    },
+    "originalRequestId": {
+      "type": "string",
+      "description": "Echo back the requestId from the original check-in request (if provided). Allows orchestrator to correlate the response with the original invocation.",
+      "examples": ["req-12345"],
+      "maxLength": 50
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable status message describing the outcome. Useful for logging or displaying to the user in the orchestrator.",
+      "examples": [
+        "Check-in completed successfully.",
+        "User cancelled the check-in.",
+        "Error: Unable to process check-in due to network timeout."
+      ],
+      "maxLength": 500
+    },
+    "errorDetails": {
+      "type": "string",
+      "description": "Technical error details if status = FAILURE. Should include error code, stack trace summary, or diagnostic info for troubleshooting. MUST be null if status = SUCCESS or CANCEL.",
+      "examples": [
+        "Network timeout after 30 seconds. Failed to submit check-in data to server.",
+        "Invalid parameter: userId is required but was null."
+      ],
+      "maxLength": 1000
+    },
+    "returnData": {
+      "type": "object",
+      "description": "Optional key-value pairs with additional data to pass back to the orchestrator. Can include confirmation IDs, updated user state, or other workflow results.",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "examples": [
+        {
+          "confirmationId": "CHK-789",
+          "checkInTime": "2026-01-26T14:35:00Z"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "SUCCESS" } }
+      },
+      "then": {
+        "properties": {
+          "errorDetails": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "status": { "const": "FAILURE" } }
+      },
+      "then": {
+        "required": ["errorDetails"]
+      }
+    }
+  ],
+  "examples": [
+    {
+      "status": "SUCCESS",
+      "completedTimestamp": "2026-01-26T14:35:00Z",
+      "originalRequestId": "req-12345",
+      "message": "Check-in completed successfully.",
+      "returnData": {
+        "confirmationId": "CHK-789",
+        "checkInTime": "2026-01-26T14:35:00Z"
+      }
+    },
+    {
+      "status": "CANCEL",
+      "completedTimestamp": "2026-01-26T14:33:00Z",
+      "originalRequestId": "req-12345",
+      "message": "User cancelled the check-in."
+    },
+    {
+      "status": "FAILURE",
+      "completedTimestamp": "2026-01-26T14:36:00Z",
+      "originalRequestId": "req-12345",
+      "message": "Error: Unable to process check-in due to network timeout.",
+      "errorDetails": "Network timeout after 30 seconds. HTTP 408 received from API endpoint /api/checkin."
+    }
+  ],
+  "notes": [
+    "This contract is implemented when the MAUI app is launched via deep link. For standalone launches, no handoff response is sent.",
+    "The MAUI app constructs a deep link to the orchestrator (e.g., reactnativeapp://handoff-complete?status=SUCCESS&...) with this data serialized as query parameters.",
+    "Launch mode detection: The app tracks whether it was invoked via deep link (LaunchMode = DEEP_LINK) or standalone (LaunchMode = STANDALONE) using the LaunchContext entity.",
+    "Orchestrator MUST implement timeout handling: if no response is received within 30 seconds of invoking the MAUI app, assume FAILURE and log the incident.",
+    "The returnData object allows extensibility for workflow-specific results without modifying the core schema."
+  ]
+}
