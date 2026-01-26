@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiShellApp.Views.CheckInPage"
+             Title="Check-In">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Header -->
+            <Label Text="Check-In Details" 
+                   FontSize="24" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+
+            <!-- User ID -->
+            <Label x:Name="UserIdLabel" 
+                   Text="User ID: (not provided)" 
+                   FontSize="16"
+                   LineBreakMode="WordWrap"/>
+
+            <!-- Location -->
+            <Label x:Name="LocationLabel" 
+                   Text="Location: (not provided)" 
+                   FontSize="16"
+                   LineBreakMode="WordWrap"/>
+
+            <!-- Event -->
+            <Label x:Name="EventLabel" 
+                   Text="Event: (not provided)" 
+                   FontSize="16"
+                   LineBreakMode="WordWrap"/>
+
+            <!-- Custom Fields Section -->
+            <Label Text="Additional Parameters:" 
+                   FontSize="18" 
+                   FontAttributes="Bold"
+                   Margin="0,20,0,10"
+                   x:Name="CustomFieldsHeader"
+                   IsVisible="False"/>
+
+            <VerticalStackLayout x:Name="CustomFieldsContainer" 
+                                 Spacing="10"/>
+
+            <!-- Done Button (T033, T035: 50pt height for ≥44pt touch target) -->
+            <Button x:Name="DoneButton"
+                    Text="Done"
+                    FontSize="18"
+                    HeightRequest="50"
+                    Margin="0,30,0,0"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    Clicked="OnDoneClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
