@@ -1,0 +1,6 @@
+module Pods_FLNALauncher {
+  umbrella header "Pods-FLNALauncher-umbrella.h"
+
+  export *
+  module * { export * }
+}
