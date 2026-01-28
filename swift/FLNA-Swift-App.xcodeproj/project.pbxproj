@@ -6,30 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2FE0AACB2F295D6700B42D5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE0AAC82F295D6700B42D5C /* ContentView.swift */; };
+		2FE0AACC2F295D6700B42D5C /* FLNA_Swift_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE0AAC92F295D6700B42D5C /* FLNA_Swift_AppApp.swift */; };
+		2FE0AACE2F295D6700B42D5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE0AAC72F295D6700B42D5C /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2F02EB872F27DEB000D37515 /* FLNA-Swift-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FLNA-Swift-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FE0AAC72F295D6700B42D5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2FE0AAC82F295D6700B42D5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2FE0AAC92F295D6700B42D5C /* FLNA_Swift_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLNA_Swift_AppApp.swift; sourceTree = "<group>"; };
+		2FE0AACA2F295D6700B42D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2FE0AACF2F295D6B00B42D5C /* FLNA-Swift-App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FLNA-Swift-App-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		2F02EB962F27E0A100D37515 /* Exceptions for "FLNA-Swift-App" folder in "FLNA-Swift-App" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 2F02EB862F27DEB000D37515 /* FLNA-Swift-App */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		2F02EB892F27DEB000D37515 /* FLNA-Swift-App */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				2F02EB962F27E0A100D37515 /* Exceptions for "FLNA-Swift-App" folder in "FLNA-Swift-App" target */,
-			);
-			path = "FLNA-Swift-App";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		2F02EB842F27DEB000D37515 /* Frameworks */ = {
@@ -45,8 +35,12 @@
 		2F02EB7E2F27DEB000D37515 = {
 			isa = PBXGroup;
 			children = (
-				2F02EB892F27DEB000D37515 /* FLNA-Swift-App */,
+				2FE0AAC72F295D6700B42D5C /* Assets.xcassets */,
+				2FE0AAC82F295D6700B42D5C /* ContentView.swift */,
+				2FE0AAC92F295D6700B42D5C /* FLNA_Swift_AppApp.swift */,
+				2FE0AACA2F295D6700B42D5C /* Info.plist */,
 				2F02EB882F27DEB000D37515 /* Products */,
+				2FE0AACF2F295D6B00B42D5C /* FLNA-Swift-App-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,9 +67,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				2F02EB892F27DEB000D37515 /* FLNA-Swift-App */,
-			);
 			name = "FLNA-Swift-App";
 			packageProductDependencies = (
 			);
@@ -95,6 +86,7 @@
 				TargetAttributes = {
 					2F02EB862F27DEB000D37515 = {
 						CreatedOnToolsVersion = 26.2;
+						LastSwiftMigration = 2620;
 					};
 				};
 			};
@@ -122,6 +114,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FE0AACE2F295D6700B42D5C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +125,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FE0AACB2F295D6700B42D5C /* ContentView.swift in Sources */,
+				2FE0AACC2F295D6700B42D5C /* FLNA_Swift_AppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,11 +257,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "FLNA-Swift-App/Info.plist";
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -283,6 +279,8 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "FLNA-Swift-App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -294,11 +292,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "FLNA-Swift-App/Info.plist";
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -315,6 +314,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "FLNA-Swift-App-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

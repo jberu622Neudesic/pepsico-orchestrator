@@ -3,7 +3,7 @@
  * @format
  */
 
-import React from 'react';
+import React from "react";
 import {
   Alert,
   Linking,
@@ -11,49 +11,49 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../App';
+} from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
 
 type AppSelectionScreenProps = NativeStackScreenProps<
   RootStackParamList,
-  'AppSelection'
+  "AppSelection"
 >;
 
 function AppSelectionScreen({}: AppSelectionScreenProps) {
   const handleMauiApp = async () => {
-    const deepLink = 'mauiapp://';
+    const deepLink = "mauiapp://";
     try {
       const canOpen = await Linking.canOpenURL(deepLink);
       if (canOpen) {
         await Linking.openURL(deepLink);
       } else {
         Alert.alert(
-          'App Not Available',
-          'Maui App is not installed or cannot be opened.',
+          "App Not Available",
+          "Maui App is not installed or cannot be opened.",
         );
       }
     } catch (error) {
-      Alert.alert('Error', 'Failed to open Maui App');
-      console.error('Error opening Maui App:', error);
+      Alert.alert("Error", "Failed to open Maui App");
+      console.error("Error opening Maui App:", error);
     }
   };
 
   const handleSwiftApp = async () => {
-    const deepLink = 'FLNA://';
+    const deepLink = "FLNA://";
     try {
       const canOpen = await Linking.canOpenURL(deepLink);
       if (canOpen) {
         await Linking.openURL(deepLink);
       } else {
         Alert.alert(
-          'App Not Available',
-          'FLNA is not installed or cannot be opened.',
+          "App Not Available",
+          "FLNA is not installed or cannot be opened.",
         );
       }
     } catch (error) {
-      Alert.alert('Error', 'Failed to open FLNA');
-      console.error('Error opening FLNA:', error);
+      Alert.alert("Error", "Failed to open FLNA");
+      console.error("Error opening FLNA:", error);
     }
   };
 
@@ -81,28 +81,28 @@ function AppSelectionScreen({}: AppSelectionScreenProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 40,
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     borderRadius: 8,
     padding: 16,
-    width: '80%',
+    width: "80%",
     maxWidth: 300,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 16,
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 
