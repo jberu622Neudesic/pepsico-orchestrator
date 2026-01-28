@@ -111,27 +111,22 @@ public partial class CheckInPage : ContentPage
 
 			var handoffUrl = $"{returnUrl}?status=SUCCESS&completedTimestamp={timestamp}&message={message}&originalRequestId={requestId}";
 
-
-
-			await Launcher.OpenAsync(new Uri("flnalauncher://app-selection"));
-
-
-			// handoffUrl = "flnalauncher://app-selection";
-
-			// // T048: Invoke orchestrator using Launcher
-			// var canOpen = await Launcher.CanOpenAsync(handoffUrl);
-			// if (canOpen)
-			// {
-			// 	await Launcher.OpenAsync(handoffUrl);
-			// }
-			// else
-			// {
-			// 	// T049: Handle error if orchestrator URL scheme not registered
-			// 	await DisplayAlert(
-			// 		"Handoff Error",
-			// 		$"Cannot open orchestrator URL scheme. The orchestrator app may not be installed.\n\nAttempted URL: {returnUrl}",
-			// 		"OK");
-			// }
+			// T048: Invoke orchestrator using Launcher
+			//Launcher.CanOpenAsync() is being too strict when checking the full URL with query parameters. It's a known limitation in MAUI on iOS - the API validates the entire URL string and may reject URLs with query parameters, even though OpenAsync() can actually open them successfully.
+			// Note: CanOpenAsync can return false negatives on iOS, so we try opening directly
+			try
+			{
+				await Launcher.OpenAsync(handoffUrl);
+			}
+			catch (Exception launcherEx)
+			{
+				// T049: Handle error if orchestrator URL scheme not registered
+				await DisplayAlert(
+					"Handoff Error",
+					$"Cannot open orchestrator URL scheme. The orchestrator app may not be installed.\n\nAttempted URL: {returnUrl}",
+					"OK");
+				Console.WriteLine($"[ERROR] Failed to launch URL: {launcherEx.Message}");
+			}
 		}
 		catch (Exception ex)
 		{
