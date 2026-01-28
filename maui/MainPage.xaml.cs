@@ -1,3 +1,4 @@
+using MauiShellApp.Views;
 using Microsoft.Maui.ApplicationModel;
 
 namespace MauiShellApp;
@@ -21,6 +22,12 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {count} times";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
+
+		//testing navigation to CheckInPage without parameters
+		var checkInPage = new CheckInPage(null);
+		Application.Current.MainPage = new NavigationPage(checkInPage);
+
+
 	}
 
 	private async void OnOpenAppSelectionClicked(object? sender, EventArgs e)

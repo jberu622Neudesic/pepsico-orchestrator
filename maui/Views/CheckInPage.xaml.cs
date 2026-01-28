@@ -76,17 +76,21 @@ public partial class CheckInPage : ContentPage
 	/// </summary>
 	private async void OnDoneClicked(object sender, EventArgs e)
 	{
-		// T044: Check launch mode
-		if (App.CurrentLaunchMode == LaunchMode.STANDALONE)
-		{
-			// T050: Standalone confirmation
-			await DisplayAlert("Success", "Check-in completed!", "OK");
-		}
-		else
-		{
-			// Deep link mode - send handoff response
+
+		// Deep link mode - send handoff response
 			await SendHandoffResponse();
-		}
+
+		// // T044: Check launch mode
+		// if (App.CurrentLaunchMode == LaunchMode.STANDALONE)
+		// {
+		// 	// T050: Standalone confirmation
+		// 	await DisplayAlert("Success", "Check-in completed!", "OK");
+		// }
+		// else
+		// {
+		// 	// Deep link mode - send handoff response
+		// 	await SendHandoffResponse();
+		// }
 	}
 
 	/// <summary>
@@ -96,8 +100,9 @@ public partial class CheckInPage : ContentPage
 	{
 		try
 		{
+			
 			// T046: Get orchestrator return URL
-			var returnUrl = App.OrchestratorReturnUrl ?? "reactnativeapp://handoff-complete";
+			var returnUrl = App.OrchestratorReturnUrl ?? "flnalauncher://app-selection";
 
 			// T047: Build query string with response data
 			var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
@@ -106,20 +111,27 @@ public partial class CheckInPage : ContentPage
 
 			var handoffUrl = $"{returnUrl}?status=SUCCESS&completedTimestamp={timestamp}&message={message}&originalRequestId={requestId}";
 
-			// T048: Invoke orchestrator using Launcher
-			var canOpen = await Launcher.CanOpenAsync(handoffUrl);
-			if (canOpen)
-			{
-				await Launcher.OpenAsync(handoffUrl);
-			}
-			else
-			{
-				// T049: Handle error if orchestrator URL scheme not registered
-				await DisplayAlert(
-					"Handoff Error",
-					$"Cannot open orchestrator URL scheme. The orchestrator app may not be installed.\n\nAttempted URL: {returnUrl}",
-					"OK");
-			}
+
+
+			await Launcher.OpenAsync(new Uri("flnalauncher://app-selection"));
+
+
+			// handoffUrl = "flnalauncher://app-selection";
+
+			// // T048: Invoke orchestrator using Launcher
+			// var canOpen = await Launcher.CanOpenAsync(handoffUrl);
+			// if (canOpen)
+			// {
+			// 	await Launcher.OpenAsync(handoffUrl);
+			// }
+			// else
+			// {
+			// 	// T049: Handle error if orchestrator URL scheme not registered
+			// 	await DisplayAlert(
+			// 		"Handoff Error",
+			// 		$"Cannot open orchestrator URL scheme. The orchestrator app may not be installed.\n\nAttempted URL: {returnUrl}",
+			// 		"OK");
+			// }
 		}
 		catch (Exception ex)
 		{

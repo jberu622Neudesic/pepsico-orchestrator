@@ -47,3 +47,7 @@ logs/
 
 # rspec failure tracking
 .rspec_status
+react/ios/Podfile.lock
+react/ios/Podfile.lock
+swift/FLNA-Swift-App.xcodeproj/project.xcworkspace/xcuserdata/jorgeberumen.xcuserdatad/UserInterfaceState.xcuserstate
+swift/FLNA-Swift-App.xcodeproj/xcuserdata/jorgeberumen.xcuserdatad/xcschemes/xcschememanagement.plist

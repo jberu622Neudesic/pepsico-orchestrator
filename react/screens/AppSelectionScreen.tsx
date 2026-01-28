@@ -22,7 +22,7 @@ type AppSelectionScreenProps = NativeStackScreenProps<
 
 function AppSelectionScreen({}: AppSelectionScreenProps) {
   const handleMauiApp = async () => {
-    const deepLink = "mauiapp://";
+    const deepLink = "mauiapp://check-in?userId=123&location=Store5";
     try {
       const canOpen = await Linking.canOpenURL(deepLink);
       if (canOpen) {
